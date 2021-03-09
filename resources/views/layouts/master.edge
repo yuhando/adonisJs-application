@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>
+    @section('title')
+      Kompas Test
+    @endsection
+  </title>
+
+  {{ style('font') }}
+  {{ style('icon') }}
+
+  {{ style('font-awesome.min') }}
+  {{ style('bootstrap.min') }}
+
+  {{ style('app') }}
+
+  {{ script('jquery.min') }}
+  {{ script('bootstrap.min') }}
+
+  {{ script('app') }}
+  
+  
+</head>
+<body>
+  @!section('content')
+  <!-- Bootstrap Date-Picker Plugin -->
+  {{ script('bootstrap-datepicker.min') }}
+  {{ style('bootstrap-datepicker3') }}
+<script>
+  $(document).ready(function(){
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body"
+      date_input.datepicker({
+          format: 'dd-mm-yyyy',
+          container: container,
+          todayHighlight: true,
+          autoclose: true,
+      })
+
+      $('#articleTable').on('click', '.edit', function () {
+          const atc_id = $(this).data('atc_id')
+          const title = $(this).data('title')
+          const body = $(this).data('body')
+          const date = $(this).data('date')
+          const author_id = $(this).data('author_id')
+          const author = $(this).data('author')
+          const page_view = $(this).data('page_view')
+          const status_id = $(this).data('status_id')
+          const status = $(this).data('status')
+          $('#editArticleModal').modal('show')
+          $('.atc_id').val(atc_id)
+          $('.title').val(title)
+          $('.body').val(body)
+          $('.date').val(date)
+          $('.author').append('<option selected value= '+ author_id +'> ' + author + ' </option>')
+          $('.page_view').val(page_view)
+          $('.status').append('<option selected value= '+ status_id +'> ' + status + ' </option>')
+        });
+
+        if($(".alert")[0]){
+          $(".alert.alert-success" ).fadeOut(5000);
+        }
+  })
+</script>
+</body>
+</html>
