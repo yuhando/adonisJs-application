@@ -33,7 +33,6 @@ class RegisterController {
   async store ({ request, session, response }) {
     const passwordValidator = await this.passwordValidator(request.input('password'))
     if(passwordValidator) {
-      console.log(passwordValidator)
       session.flash({ errorMessage: passwordValidator })
       return response.redirect('/register')
     }
